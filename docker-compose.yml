@@ -1,0 +1,63 @@
+version: "3.1"
+services:
+
+  eureka-service:
+    image: hidenxtt2001/social-shop-eureka-service:latest
+    networks:
+      - main
+
+
+  auth-redis:
+    image: redis/redis-stack-server:latest
+    networks:
+      - auth
+
+  auth-database:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
+    restart: on-failure
+    volumes:
+      - "./scripts/db/auth-service:/docker-entrypoint-initdb.d"
+    networks:
+      - auth
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+
+  auth-service:
+    image: hidenxtt2001/social-shop-auth-service:latest
+    environment:
+      - MYSQL_HOST=auth-database
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+      - EUREKA_HOST=http://eureka:8761/eureka
+      - JWT_SIGNING_KEY=${JWT_SIGNING_KEY}
+      - REDIS_HOST_URL=auth-redis
+      - REDIS_HOST_PORT=6379
+    depends_on:
+      auth-database:
+        condition: service_healthy
+      auth-redis:
+        condition: service_started
+    networks:
+      - main
+      - auth
+
+networks:
+  main:
+    driver: bridge
+  auth:
+    driver: bridge
+
+volumes:
+  mysql:
+
+
+
+
+
+
+
+
+
