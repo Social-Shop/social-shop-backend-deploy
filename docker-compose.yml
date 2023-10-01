@@ -6,6 +6,12 @@ services:
     networks:
       - main
 
+  gateway-service:
+    image: hidenxtt2001/social-shop-eureka-service:latest
+    ports:
+      - 8080:8080
+    networks:
+      - main
 
   auth-redis:
     image: redis/redis-stack-server:latest
