@@ -12,6 +12,9 @@ services:
       - EUREKA_HOST=eureka-service
     ports:
       - 8080:8080
+    depends_on:
+      eureka-service:
+        condition: service_started
     networks:
       - main
 
