@@ -3,6 +3,8 @@ services:
 
   eureka-service:
     image: hidenxtt2001/social-shop-eureka-service:latest
+    ports:
+      - 8761:8761
     networks:
       - main
 
