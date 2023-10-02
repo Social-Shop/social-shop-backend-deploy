@@ -9,7 +9,7 @@ services:
   gateway-service:
     image: hidenxtt2001/social-shop-api-gateway:latest
     environment:
-      - EUREKA_HOST=eureka-service
+      - EUREKA_HOST=http://eureka-service:8761/eureka
     ports:
       - 8080:8080
     depends_on:
@@ -40,9 +40,9 @@ services:
   auth-service:
     image: hidenxtt2001/social-shop-auth-service:latest
     environment:
-      - MYSQL_HOST=auth-database
+      - MYSQL_HOST=jdbc:mysql://auth-database:3306/auth?allowPublicKeyRetrieval=true&useSSL=false
       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
-      - EUREKA_HOST=eureka-service
+      - EUREKA_HOST=http://eureka-service:8761/eureka
       - JWT_SIGNING_KEY=${JWT_SIGNING_KEY}
       - REDIS_HOST_URL=auth-redis
       - REDIS_HOST_PORT=6379
