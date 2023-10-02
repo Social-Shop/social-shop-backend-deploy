@@ -46,8 +46,8 @@ services:
       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
       - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
       - JWT_SIGNING_KEY=${JWT_SIGNING_KEY}
-      - REDIS_HOST_URL=auth-redis
-      - REDIS_HOST_PORT=6379
+      - REDIS_URL=auth-redis
+      - REDIS_PORT=6379
     depends_on:
       eureka-service:
         condition: service_started
