@@ -42,6 +42,7 @@ services:
       - REDIS_HOST_URL=auth-redis
       - REDIS_HOST_PORT=6379
     depends_on:
+      gateway-service:
       auth-database:
         condition: service_healthy
       auth-redis:
