@@ -43,7 +43,7 @@ services:
       - REDIS_HOST_PORT=6379
     depends_on:
       gateway-service:
-        condition: service_completed_successfully
+        condition: service_started
       auth-database:
         condition: service_healthy
       auth-redis:
