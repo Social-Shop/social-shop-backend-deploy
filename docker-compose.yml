@@ -56,7 +56,7 @@ services:
       auth-database:
         condition: service_healthy
       auth-redis:
-        condition: service_healthy
+        condition: service_started
     networks:
       - main
       - auth
