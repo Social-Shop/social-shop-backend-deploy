@@ -44,7 +44,7 @@ services:
     environment:
       - MYSQL_HOST=jdbc:mysql://auth-database:3306/auth?allowPublicKeyRetrieval=true&useSSL=false
       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
-      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
+      - EUREKA_HOST=http://eureka-service:8761/eureka/
       - JWT_SIGNING_KEY=${JWT_SIGNING_KEY}
       - REDIS_URL=auth-redis
       - REDIS_PORT=6379
@@ -56,7 +56,7 @@ services:
       auth-database:
         condition: service_healthy
       auth-redis:
-        condition: service_started
+        condition: service_healthy
     networks:
       - main
       - auth
