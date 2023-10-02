@@ -7,7 +7,7 @@ services:
       - main
 
   gateway-service:
-    image: hidenxtt2001/social-shop-eureka-service:latest
+    image: hidenxtt2001/social-shop-api-gateway:latest
     ports:
       - 8080:8080
     networks:
